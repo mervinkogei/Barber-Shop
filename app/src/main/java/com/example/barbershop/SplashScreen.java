@@ -9,16 +9,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SplashScreen extends AppCompatActivity {
-    private TextView tvWelcome;
-    private ImageView ivLogo;
+   @BindView (R.id.tvWelcome) TextView tvWelcome;
+   @BindView (R.id.ivLogo) ImageView ivLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        tvWelcome = (TextView) findViewById(R.id.tvWelcome);
-        ivLogo = (ImageView) findViewById(R.id.ivLogo);
+        ButterKnife.bind(this);
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.splash);
         tvWelcome.startAnimation(myanim);
