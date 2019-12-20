@@ -18,7 +18,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="250dp"
-            android:src="@drawable/barber" />
+            android:src="@drawable/logo_back" />
 
         <TextView
             android:id="@+id/tvWelcome"
