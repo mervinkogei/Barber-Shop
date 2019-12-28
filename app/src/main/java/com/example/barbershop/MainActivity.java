@@ -12,15 +12,21 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.accountkit.AccessToken;
+import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+import com.google.android.gms.common.internal.service.Common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.barbershop.Common.Common.IS_LOGIN;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,13 +41,30 @@ public class MainActivity extends AppCompatActivity {
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
                 new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.TOKEN);
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
-        startActivity();
+        startActivityForResult(intent, APP_REQUEST_CODE);
+    }
+
+    @OnClick(R.id.txt_skip)
+    void skipLoginJustGoHome(){
+        Intent intent = new Intent(this,HomeActivity.class);
+        intent.putExtra(Common.IS_LOGIN,false);
+        startActivity(intent);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { 
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        AccessToken accessToken = AccountKit.getCurrentAccessToken();
+        if (accessToken != null){
+            Intent intent = new Intent(this,HomeActivity.class);
+            intent.putExtra(Common.IS_LOGIN,true);
+            startActivity(intent);
+            finish();
+        } else {
+            setContentView(R.layout.activity_main);
+            ButterKnife.bind(MainActivity.this);
+        }
 
 //        printKeyHash();
     }

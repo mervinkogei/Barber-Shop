@@ -1,5 +1,5 @@
 <resources>
-       <string name="app_name">BarberShop</string>
+    <string name="app_name">BarberShop</string>
     <string name="FACEBOOK_APP_ID">493355264618366</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">[ACCOUNT_KIT_CLIENT_TOKEN]</string>
 </resources>
