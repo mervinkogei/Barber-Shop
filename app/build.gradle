@@ -32,4 +32,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
+    //Add Libraries
+//    implementation 'com.android.support.appcompact-v7:28.0.0'
+//    implementation 'com.android.support.design:28.0.0'
+
+    apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+//    implementation 'com.google.firebase:firebase-core:19.2.0'
+    implementation 'com.google.firebase:firebase-firestore:21.3.1'
+    implementation 'com.facebook.android:account-kit-sdk:5.2.0'
+
+
+
 }
