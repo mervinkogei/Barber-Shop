@@ -1,5 +1,6 @@
 package com.example.barbershop;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,13 +12,15 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.barbershop.Common.Common;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
-import com.google.android.gms.common.internal.service.Common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,7 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.barbershop.Common.Common.IS_LOGIN;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +49,27 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.txt_skip)
     void skipLoginJustGoHome(){
         Intent intent = new Intent(this,HomeActivity.class);
-        intent.putExtra(Common.IS_LOGIN,false);
+        intent.putExtra(Common.IS_LOGIN, false);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == APP_REQUEST_CODE){
+            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+            if (loginResult.getError() != null){
+                Toast.makeText(this,""+ loginResult.getError().getErrorType().getMessage(),Toast.LENGTH_SHORT).show();
+            }
+            else if (loginResult.wasCancelled()){
+                Toast.makeText(this,"Login Cancelled",Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(this,HomeActivity.class);
+                intent.putExtra(Common.IS_LOGIN,false);
+                startActivity(intent);
+                finish();
+            }
+        }
     }
 
     @Override
