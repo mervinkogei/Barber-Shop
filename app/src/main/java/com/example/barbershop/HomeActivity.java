@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.barbershop.Common.Common;
@@ -72,12 +70,19 @@ public class HomeActivity extends AppCompatActivity {
                                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            DocumentSnapshot userSnapshot = null;
                                             if (task.isSuccessful()) {
-                                                DocumentSnapshot userSnapshot = task.getResult();
+                                                userSnapshot = task.getResult();
                                                 if (!userSnapshot.exists())
+
                                                     showUpdateDialog(account.getPhoneNumber().toString());
+                                            } else {
+                                                //user available
+                                                Common.currentUser = userSnapshot.toObject(User.class);
+                                                bottomNavigationView.setSelectedItemId(R.id.action_home);
+
                                             }
-                                            if (dialog.isShowing()){
+                                            if (dialog.isShowing()) {
                                                 dialog.dismiss();
                                             }
                                         }
@@ -108,7 +113,6 @@ public class HomeActivity extends AppCompatActivity {
                 return loadFragment(fragment);
             }
         });
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
 
     }
 
@@ -141,16 +145,20 @@ public class HomeActivity extends AppCompatActivity {
                 if (!dialog.isShowing()){
                     dialog.show();
                 }
-                User user = new User(edt_name.getText().toString(),
+               final User user = new User(edt_name.getText().toString(),
                         edt_address.getText().toString(), phoneNumber);
                 userRef.document(phoneNumber)
                         .set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                bottomSheetDialog.dismiss();
                                 if (dialog.isShowing())
                                     dialog.dismiss();
-                                bottomSheetDialog.dismiss();
+
+                                Common.currentUser = user;
+                                bottomNavigationView.setSelectedItemId(R.id.action_home);
+
                                 Toast.makeText(HomeActivity.this, "Thank You", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -166,6 +174,15 @@ public class HomeActivity extends AppCompatActivity {
         bottomSheetDialog.setContentView(sheetView);
         bottomSheetDialog.show();
 
+    }
+
+    public static class BookingActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_booking);
+        }
     }
 }
 
