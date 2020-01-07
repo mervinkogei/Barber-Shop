@@ -18,8 +18,10 @@ Its a mobile platform where clients book and pay for hair appointments online or
 
 | Input                                      | Behavior                                 | Output                                        |
 |--------------------------------------------|------------------------------------------|-----------------------------------------------|
-| The user launches the app                  | The app fetches the main activity        | The user is presented with the home view |
-| The user clicks "Sign UP/Login"              | The app gets the login activity           | The user is taken to the login view        |
+| App Loads the Splash Screen                | The app fetches the splash screen        | The user is presented with the home view      |
+| The user launches the app                  | The app fetches the main activity        | The user is presented with the home view      |
+| The user clicks "Just Skip/Login"          | The app gets the login activity          | The user is taken to the login view           |
+| The user clicks "Home or Cart fragment"    | App gets Booking fragment display        | The user is taken to the step of Booking      |
 
 
 ## Technologies used
