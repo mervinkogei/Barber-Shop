@@ -1,4 +1,4 @@
-## Barber-Shop
+## Barber-Shop [![codebeat badge](https://codebeat.co/badges/411e8d82-3ed0-42de-a283-fdc13700504d)](https://codebeat.co/projects/github-com-mervinkogei-barber-shop-master)
 This is an android app that allows the user to search for Barber stylist in their location and check the services they offer.
 
 ## Descriptions
