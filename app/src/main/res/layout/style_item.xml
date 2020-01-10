@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+<androidx.cardview.widget.CardView
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="7dp"
+    app:cardCornerRadius="10dp"
+    android:layout_width="match_parent"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+<ImageView
+    android:id="@+id/imgBarber"
+    android:layout_width="match_parent"
+    android:scaleType="centerInside"
+    android:layout_height="200dp"/>
+
+        <ImageView
+            android:src="@drawable/text_shadow"
+            android:layout_alignBottom="@id/imgBarber"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
+
+    <TextView
+        android:id="@+id/txtBarber"
+        android:text="Style"
+        android:gravity="bottom"
+        android:layout_marginTop="135dp"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"/>
+
+    <TextView
+        android:id="@+id/txtComment"
+        android:text="Style"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/colorWhite"
+        android:drawableLeft="@drawable/ic_action_name"
+        android:layout_below="@id/txtBarber"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+</FrameLayout>

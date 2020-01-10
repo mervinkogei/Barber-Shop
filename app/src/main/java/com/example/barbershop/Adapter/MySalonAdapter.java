@@ -1,6 +1,7 @@
 package com.example.barbershop.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barbershop.Common.Common;
 import com.example.barbershop.Interface.IRecyclerItemSelectedListener;
 import com.example.barbershop.Models.Salon;
 import com.example.barbershop.R;
@@ -22,11 +25,13 @@ public class MySalonAdapter extends RecyclerView.Adapter<MySalonAdapter.MyViewHo
     Context context;
     List<Salon> salonList;
     List<CardView> cardViewList;
+    LocalBroadcastManager localBroadcastManager;
 
     public MySalonAdapter(Context context, List<Salon> salonList) {
         this.context = context;
         this.salonList = salonList;
         cardViewList = new ArrayList<>();
+        localBroadcastManager = LocalBroadcastManager.getInstance(context);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -82,6 +87,12 @@ public class MySalonAdapter extends RecyclerView.Adapter<MySalonAdapter.MyViewHo
                     cardView.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
 
                 //Set BG Background color for selected Items
+                myViewHolder.card_salon.setCardBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_dark));
+
+                //Send Broadcast to enable to Next Button
+                Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
+                intent.putExtra(Common.KEY_SALON_STORE,salonList.get(pos));
+                localBroadcastManager.sendBroadcast(intent);
             }
         });
 

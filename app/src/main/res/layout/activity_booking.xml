@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <com.example.barbershop.Common.NonSwipeViewPager
         android:id="@+id/view_pager"
         android:layout_above="@id/layout_button"
         android:layout_below="@+id/step_view"
@@ -56,6 +56,7 @@
             android:id="@+id/btn_next_step"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:enabled="false"
             android:text="Next"
             android:layout_above="@id/step_view"
             android:layout_centerHorizontal="true"

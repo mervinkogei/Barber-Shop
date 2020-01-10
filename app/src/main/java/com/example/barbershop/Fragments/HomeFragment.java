@@ -59,8 +59,9 @@ public class HomeFragment extends Fragment implements ILookbookLoadListener, IBa
     Slider banner_slider;
     @BindView(R.id.recycler_look_book)
     RecyclerView recycler_look_book;
-    @OnClick (R.id.card_view_booking)
-            void booking(){
+
+    @OnClick(R.id.card_view_booking)
+    void booking() {
         startActivity(new Intent(getActivity(), BookingActivity.class));
     }
 
@@ -85,6 +86,7 @@ public class HomeFragment extends Fragment implements ILookbookLoadListener, IBa
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+
         //Initialization
         Slider.init(new PicassoImageLoadingService());
         iBannerLoadListener = this;
@@ -98,6 +100,7 @@ public class HomeFragment extends Fragment implements ILookbookLoadListener, IBa
         }
         return view;
     }
+
 
     private void loadLookBook() {
         lookbookRef.get()
