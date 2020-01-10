@@ -53,13 +53,6 @@ public class MyBarberStylistAdapter extends RecyclerView.Adapter<MyBarberStylist
         holder.bindBarber(mhits.get(position));
     }
 
-
-//    private Object mhits(int position) {
-//
-//    }
-
-
-
     @Override
     public int getItemCount() {
         return mhits.size();
