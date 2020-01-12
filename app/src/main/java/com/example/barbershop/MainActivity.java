@@ -1,111 +1,106 @@
 package com.example.barbershop;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.barbershop.Common.Common;
-import com.facebook.accountkit.AccessToken;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitLoginResult;
-import com.facebook.accountkit.ui.AccountKitActivity;
-import com.facebook.accountkit.ui.AccountKitConfiguration;
-import com.facebook.accountkit.ui.LoginType;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-
-public class MainActivity extends AppCompatActivity {
-
-    private static final int APP_REQUEST_CODE = 7117;
-
-    @BindView(R.id.btn_login) Button btn_login;
-    @BindView(R.id.txt_skip) TextView txt_skip;
-
-    @OnClick(R.id.btn_login)
-    void loginUser(){
-        final Intent intent = new Intent(this, AccountKitActivity.class);
-        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
-                new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE, AccountKitActivity.ResponseType.TOKEN);
-        intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
-        startActivityForResult(intent, APP_REQUEST_CODE);
-    }
-
-    @OnClick(R.id.txt_skip)
-    void skipLoginJustGoHome(){
-        Intent intent = new Intent(this,StylistActivity.class);
-        intent.putExtra(Common.IS_LOGIN, false);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == APP_REQUEST_CODE){
-            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-            if (loginResult.getError() != null){
-                Toast.makeText(this,""+ loginResult.getError().getErrorType().getMessage(),Toast.LENGTH_SHORT).show();
-            }
-            else if (loginResult.wasCancelled()){
-                Toast.makeText(this,"Login Cancelled",Toast.LENGTH_SHORT).show();
-            }else {
-                Intent intent = new Intent(this,HomeActivity.class);
-                intent.putExtra(Common.IS_LOGIN,false);
-                startActivity(intent);
-                finish();
-            }
-        }
-    }
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = MainActivity.class.getSimpleName();
+    @BindView(R.id.findStyle)
+    Button mFindStyleButton;
+    @BindView(R.id.appNameTextView)
+    TextView mAppNameTextView;
+    @BindView(R.id.bookBarber) Button mBookBarber;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        AccessToken accessToken = AccountKit.getCurrentAccessToken();
-        if (accessToken != null){
-            Intent intent = new Intent(this,HomeActivity.class);
-            intent.putExtra(Common.IS_LOGIN,true);
-            startActivity(intent);
-            finish();
-        } else {
-            setContentView(R.layout.activity_main);
-            ButterKnife.bind(MainActivity.this);
-        }
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                }else {
 
-//        printKeyHash();
-    }
-
-    private void printKeyHash() {
-        try {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(
-                    getPackageName(),
-                    PackageManager.GET_SIGNATURES
-            );
-            for (Signature signature : packageInfo.signatures){
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KEYHASH", Base64.encodeToString(md.digest(),Base64.DEFAULT));
+                }
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        };
+
+//        Typeface caviarFont = Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf");
+//        mAppNameTextView.setTypeface(caviarFont);
+        mFindStyleButton.setOnClickListener(this);
+        mBookBarber.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v == mFindStyleButton) {
+            Intent intent = new Intent(MainActivity.this, StylistActivity.class);
+            startActivity(intent);
+        }
+        if (v == mBookBarber) {
+            Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+            startActivity(intent);
         }
     }
- }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void logout(){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthListener);
+    }
+
+}

@@ -27,7 +27,6 @@ import com.example.barbershop.Interface.ILookbookLoadListener;
 import com.example.barbershop.Models.Banner;
 import com.example.barbershop.R;
 import com.example.barbershop.Service.PicassoImageLoadingService;
-import com.facebook.accountkit.AccountKit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -79,27 +78,27 @@ public class HomeFragment extends Fragment implements ILookbookLoadListener, IBa
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        unbinder = ButterKnife.bind(this, view);
-
-
-        //Initialization
-        Slider.init(new PicassoImageLoadingService());
-        iBannerLoadListener = this;
-        iLookbookLoadListener = this;
-
-        //Check if logged
-        if (AccountKit.getCurrentAccessToken() != null) {
-            setUserInformation();
-            loadBanner();
-            loadLookBook();
-        }
-        return view;
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_home, container, false);
+//        unbinder = ButterKnife.bind(this, view);
+//
+//
+//        //Initialization
+//        Slider.init(new PicassoImageLoadingService());
+//        iBannerLoadListener = this;
+//        iLookbookLoadListener = this;
+//
+//        //Check if logged
+//        if (AccountKit.getCurrentAccessToken() != null) {
+//            setUserInformation();
+//            loadBanner();
+//            loadLookBook();
+//        }
+//        return view;
+//    }
 
 
     private void loadLookBook() {

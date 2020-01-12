@@ -16,10 +16,6 @@ import com.example.barbershop.Common.Common;
 import com.example.barbershop.Fragments.BookingFragment;
 import com.example.barbershop.Fragments.HomeFragment;
 import com.example.barbershop.Models.User;
-import com.facebook.accountkit.Account;
-import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitCallback;
-import com.facebook.accountkit.AccountKitError;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,48 +53,48 @@ public class HomeActivity extends AppCompatActivity {
         userRef = FirebaseFirestore.getInstance().collection("user");
         dialog = new SpotsDialog.Builder().setContext(this).setCancelable(false).build();
 
-        if (getIntent() != null) {
-            boolean isLogin = getIntent().getBooleanExtra(Common.IS_LOGIN, false);
-            if (isLogin) {
-                dialog.show();
-                AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
-                    @Override
-                    public void onSuccess(Account account) {
-                        if (account != null) {
-                            DocumentReference currentUser = userRef.document(account.getPhoneNumber().toString());
-                            currentUser.get()
-                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            DocumentSnapshot userSnapshot = null;
-                                            if (task.isSuccessful()) {
-                                                userSnapshot = task.getResult();
-                                                if (!userSnapshot.exists())
-
-                                                    showUpdateDialog(account.getPhoneNumber().toString());
-                                            } else {
-                                                //user available
-                                                Common.currentUser = userSnapshot.toObject(User.class);
-                                                bottomNavigationView.setSelectedItemId(R.id.action_home);
-
-                                            }
-                                            if (dialog.isShowing()) {
-                                                dialog.dismiss();
-                                            }
-                                        }
-                                    });
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onError(AccountKitError accountKitError) {
-                        Toast.makeText(HomeActivity.this, "" + accountKitError.getErrorType().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
+//        if (getIntent() != null) {
+//            boolean isLogin = getIntent().getBooleanExtra(Common.IS_LOGIN, false);
+//            if (isLogin) {
+//                dialog.show();
+//                AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+//                    @Override
+//                    public void onSuccess(Account account) {
+//                        if (account != null) {
+//                            DocumentReference currentUser = userRef.document(account.getPhoneNumber().toString());
+//                            currentUser.get()
+//                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                                            DocumentSnapshot userSnapshot = null;
+//                                            if (task.isSuccessful()) {
+//                                                userSnapshot = task.getResult();
+//                                                if (!userSnapshot.exists())
+//
+//                                                    showUpdateDialog(account.getPhoneNumber().toString());
+//                                            } else {
+//                                                //user available
+//                                                Common.currentUser = userSnapshot.toObject(User.class);
+//                                                bottomNavigationView.setSelectedItemId(R.id.action_home);
+//
+//                                            }
+//                                            if (dialog.isShowing()) {
+//                                                dialog.dismiss();
+//                                            }
+//                                        }
+//                                    });
+//                        }
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(AccountKitError accountKitError) {
+//                        Toast.makeText(HomeActivity.this, "" + accountKitError.getErrorType().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        }
         //view
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             Fragment fragment = null;
