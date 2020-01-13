@@ -25,12 +25,13 @@
 
     <Button
         android:id="@+id/findStyle"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bookBarber"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
         android:text="Find Hair style"
+        android:textStyle="italic"
         android:textColor="@color/colorLightBlue"
         android:background="@color/colorAccent"/>
 
@@ -43,6 +44,8 @@
         android:textColor="@color/colorLightBlue"
         android:visibility="visible"
         android:layout_marginBottom="50dp"
+        android:textStyle="italic"
+
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 

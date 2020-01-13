@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="LoginActivity">
 
     <LinearLayout
@@ -25,6 +26,7 @@
             android:inputType="textEmailAddress"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dp"
+            android:drawableLeft="@drawable/ic_action_email"
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDarkBlue"
@@ -40,6 +42,7 @@
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dp"
+            android:drawableLeft="@drawable/ic_action_password"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDarkBlue"
             android:textSize="20sp" />
