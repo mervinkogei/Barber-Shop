@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                   // getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
                 }else {
 
                 }
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
+
+
 
     @Override
     public void onStart(){

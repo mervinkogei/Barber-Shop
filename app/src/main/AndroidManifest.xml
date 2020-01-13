@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".StylistActivity" />
+        <activity
+            android:theme="@style/AppThemeAppBar"
+            android:name=".StylistActivity" />
         <activity android:name=".BookingActivity" />
         <activity android:name=".HomeActivity$BookingActivity" />
         <activity android:name=".HomeActivity" />
@@ -22,7 +24,9 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.example.barbershop.MainActivity" />
 
-        <activity android:name=".MainActivity" />
+        <activity
+            android:theme="@style/AppThemeAppBar"
+            android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
