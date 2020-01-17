@@ -18,13 +18,14 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.findStyle)
     Button mFindStyleButton;
     @BindView(R.id.appNameTextView)
     TextView mAppNameTextView;
-    @BindView(R.id.bookBarber) Button mBookBarber;
+    @BindView(R.id.bookBarber)
+    Button mBookBarber;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -36,13 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                if (user != null) {
                     getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
-                }else {
+                } else {
 
                 }
             }
@@ -55,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v){
-        if(v == mFindStyleButton) {
+    public void onClick(View v) {
+        if (v == mFindStyleButton) {
             Intent intent = new Intent(MainActivity.this, StylistActivity.class);
             startActivity(intent);
         }
@@ -67,23 +68,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
+        if (id == R.id.action_logout) {
             logout();
+            return true;
+        }
+        if (id == R.id.action_profile) {
+            profile();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void logout(){
+    private void profile() {
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void logout() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -92,15 +102,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(mAuthListener);
     }

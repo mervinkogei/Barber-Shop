@@ -4,74 +4,78 @@ package com.example.barbershop.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
+
 public class Hit {
 
     @SerializedName("largeImageURL")
     @Expose
-    private String largeImageURL;
+    public String largeImageURL;
     @SerializedName("webformatHeight")
     @Expose
-    private Integer webformatHeight;
+    public Integer webformatHeight;
     @SerializedName("webformatWidth")
     @Expose
-    private Integer webformatWidth;
+    public Integer webformatWidth;
     @SerializedName("likes")
     @Expose
-    private Integer likes;
+    public Integer likes;
     @SerializedName("imageWidth")
     @Expose
-    private Integer imageWidth;
+    public Integer imageWidth;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("user_id")
     @Expose
-    private Integer userId;
+    public Integer userId;
     @SerializedName("views")
     @Expose
-    private Integer views;
+    public Integer views;
     @SerializedName("comments")
     @Expose
-    private Integer comments;
+    public Integer comments;
     @SerializedName("pageURL")
     @Expose
-    private String pageURL;
+    public String pageURL;
     @SerializedName("imageHeight")
     @Expose
-    private Integer imageHeight;
+    public Integer imageHeight;
     @SerializedName("webformatURL")
     @Expose
-    private String webformatURL;
+    public String webformatURL;
     @SerializedName("type")
     @Expose
-    private String type;
+    public String type;
     @SerializedName("previewHeight")
     @Expose
-    private Integer previewHeight;
+    public Integer previewHeight;
     @SerializedName("tags")
     @Expose
-    private String tags;
+    public String tags;
     @SerializedName("downloads")
     @Expose
-    private Integer downloads;
+    public Integer downloads;
     @SerializedName("user")
     @Expose
-    private String user;
+    public String user;
     @SerializedName("favorites")
     @Expose
-    private Integer favorites;
+    public Integer favorites;
     @SerializedName("imageSize")
     @Expose
-    private Integer imageSize;
+    public Integer imageSize;
     @SerializedName("previewWidth")
     @Expose
-    private Integer previewWidth;
+    public Integer previewWidth;
     @SerializedName("userImageURL")
     @Expose
-    private String userImageURL;
+    public String userImageURL;
     @SerializedName("previewURL")
     @Expose
-    private String previewURL;
+    public String previewURL;
 
     /**
      * No args constructor for use in serialization

@@ -3,10 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:layout_alignParentBottom="true"
     android:padding="8dp"
     android:background="@color/colorBackground">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="450dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

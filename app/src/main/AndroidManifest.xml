@@ -11,17 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:parentActivityName=".StylistActivity"
+            android:label="Stylist Details"
+            android:theme="@style/AppThemeAppBar"
+            android:name=".StylistDetails"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Update Information"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeAppBar" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity
-            android:theme="@style/AppThemeAppBar"
-            android:label="Men's Haircut"
-
-            android:name=".StylistActivity" />
+            android:name=".StylistActivity"
+            android:label="Men&apos;s Haircut"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeAppBar" />
         <activity
-            android:theme="@style/AppThemeAppBar"
+            android:name=".BookingActivity"
             android:label="Book Barber"
-            android:name=".BookingActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeAppBar" />
         <activity android:name=".HomeActivity$BookingActivity" />
         <activity android:name=".HomeActivity" />
 
@@ -30,18 +41,17 @@
             android:value="com.example.barbershop.MainActivity" />
 
         <activity
-            android:theme="@style/AppThemeAppBar"
-            android:name=".MainActivity" />
+            android:name=".MainActivity"
+            android:theme="@style/AppThemeAppBar" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

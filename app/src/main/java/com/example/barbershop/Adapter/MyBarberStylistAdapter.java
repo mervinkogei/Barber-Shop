@@ -13,10 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barbershop.BookingActivity;
+import com.example.barbershop.Fragments.StylistDetailFragment;
 import com.example.barbershop.Models.Hit;
 import com.example.barbershop.R;
 import com.example.barbershop.StylistActivity;
+import com.example.barbershop.StylistDetails;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -58,7 +62,7 @@ public class MyBarberStylistAdapter extends RecyclerView.Adapter<MyBarberStylist
         return mhits.size();
     }
 
-    public class HitsViewHolder extends RecyclerView.ViewHolder {
+    public class HitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.txtComment) TextView txtComment;
         @BindView(R.id.txtBarber) TextView txtBarber;
         @BindView(R.id.imgBarber) ImageView imgBarber;
@@ -69,6 +73,7 @@ public class MyBarberStylistAdapter extends RecyclerView.Adapter<MyBarberStylist
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            imgBarber.setOnClickListener(this);
         }
 
         public void bindBarber(Hit hit) {
@@ -78,15 +83,18 @@ public class MyBarberStylistAdapter extends RecyclerView.Adapter<MyBarberStylist
             Picasso.get().load(hit.getWebformatURL()).into(imgBarber);
 
 
-            imgBarber.setOnClickListener(new View.OnClickListener() {
+        }
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext,BookingActivity.class);
+                    int item = getLayoutPosition();
+                    Intent intent = new Intent(mContext, StylistDetails.class);
+                    intent.putExtra("position",item);
+                    intent.putExtra("hits", Parcels.wrap(mhits.get(item)));
                     mContext.startActivity(intent);
                 }
 
-            });
-        }
+
+
     }
 }
 

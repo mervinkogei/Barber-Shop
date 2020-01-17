@@ -5,11 +5,14 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class BarberStylistResponse {
 
     @SerializedName("hits")
     @Expose
-    private List<Hit> hits = null;
+    public List<Hit> hits = null;
 
     /**
      * No args constructor for use in serialization
