@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateUserData();
-                Toast.makeText(ProfileActivity.this, "ghfjhjhhh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "You have Successfully Updated Information", Toast.LENGTH_SHORT).show();
 
             }
         });

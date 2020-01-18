@@ -113,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             logout();
             return true;
         }
+        if (id == R.id.action_settings) {
+            newStyle();
+            return true;
+        }
         if (id == R.id.action_profile) {
             profile();
             return true;
@@ -122,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void profile() {
         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+    private void newStyle() {
+        Intent intent = new Intent(MainActivity.this, NewStyleActivity.class);
         startActivity(intent);
     }
 //

@@ -15,7 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserInformationActivity"></activity>
+        <activity
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeAppBar"
+            android:label="Upload New Haircut"
+            android:name=".NewStyleActivity"></activity>
         <activity
             android:name=".StylistDetails"
             android:label="Stylist Details"

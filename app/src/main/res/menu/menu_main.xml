@@ -6,16 +6,19 @@
         android:id="@+id/action_profile"
         android:title="Profile"
         android:visible="true"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
-        android:title="Settings"
+        android:title="Upload Style"
         android:visible="true"
+        android:icon="@drawable/ic_camera_alt_black_24dp"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"
         android:title="Logout"
         android:visible="true"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
         app:showAsAction="never" />
 
 </menu>
