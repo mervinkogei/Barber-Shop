@@ -3,9 +3,7 @@ package com.example.barbershop;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = "ProfileActivity";
+public class UserInformationActivity extends AppCompatActivity {
+    private static final String TAG = "UserInformationActivity";
 
     @BindView(R.id.edt_address)
     TextView edt_address;
@@ -53,13 +50,13 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-//        databaseReference = FirebaseDatabase.getInstance().getReference("USERDATA").child(uid);
+        databaseReference = FirebaseDatabase.getInstance().getReference("USERDATA").child(uid);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateUserData();
-                Toast.makeText(ProfileActivity.this, "ghfjhjhhh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInformationActivity.this, "ghfjhjhhh", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -90,4 +87,3 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 }
-

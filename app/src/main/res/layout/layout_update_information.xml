@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_update"
+        android:id="@+id/update"
         android:text="Update"
         android:background="@color/colorButton"
         android:textColor="@color/colorWhite"

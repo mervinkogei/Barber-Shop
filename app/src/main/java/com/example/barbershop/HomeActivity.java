@@ -131,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomSheetDialog.setCancelable(false);
         View sheetView = getLayoutInflater().inflate(R.layout.layout_update_information, null);
 
-        Button btn_update = (Button) sheetView.findViewById(R.id.btn_update);
+        Button btn_update = (Button) sheetView.findViewById(R.id.update);
         TextInputEditText edt_name = (TextInputEditText) sheetView.findViewById(R.id.edt_name);
         TextInputEditText edt_address = (TextInputEditText) sheetView.findViewById(R.id.edt_address);
 

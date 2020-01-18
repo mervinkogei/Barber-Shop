@@ -48,6 +48,7 @@ public class MyBarberAdapter extends RecyclerView.Adapter<MyBarberAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+
         myViewHolder.txt_barber_name.setText(barberList.get(i).getName());
         myViewHolder.ratingBar.setRating((float)barberList.get(i).getRating());
 
