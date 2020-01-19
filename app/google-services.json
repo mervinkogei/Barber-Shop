@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "864933210058",
+    "firebase_url": "https://barber-shop-f04fc.firebaseio.com",
+    "project_id": "barber-shop-f04fc",
+    "storage_bucket": "barber-shop-f04fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864933210058:android:e11f68b2be218c66ee1133",
+        "android_client_info": {
+          "package_name": "com.example.barbershop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864933210058-2e9mgbua244qv82jivib58vk4a6jmmkk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barbershop",
+            "certificate_hash": "9af0c07a1b8b8baa474329208e2603f1d30c0424"
+          }
+        },
+        {
+          "client_id": "864933210058-6v2aiotonglmdvvdf1c00m2gu64qlh9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYGVKR15F_c-v4Ua2yOa-JDSJXNrThhCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864933210058-6v2aiotonglmdvvdf1c00m2gu64qlh9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
