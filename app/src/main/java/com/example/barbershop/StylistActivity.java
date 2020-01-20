@@ -120,4 +120,5 @@ public class StylistActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 }

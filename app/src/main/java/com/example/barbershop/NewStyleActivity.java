@@ -1,30 +1,44 @@
 package com.example.barbershop;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewStyleActivity extends AppCompatActivity {
 
-    private final static int CAMERA_REQUEST_CODE = 1;
+    private final static int CAMERA_REQUEST_CODE = 111;
+
+    private FirebaseStorage storage;
     private StorageReference mstorage;
     private ProgressDialog mProgress;
 
@@ -57,19 +71,8 @@ public class NewStyleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CAMERA_REQUEST_CODE && requestCode == RESULT_OK){
-            mProgress.setMessage("Uploading Image");
-            mProgress.show();
-
-            Uri uri = data.getData();
-            StorageReference filepath = mstorage.child("photos").child(uri.getLastPathSegment());
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    mProgress.dismiss();
-                    Toast.makeText(NewStyleActivity.this,"Uploading Successful.....",Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        image_upload.setImageBitmap(bitmap);
     }
+
 }

@@ -21,11 +21,11 @@ import com.example.barbershop.StylistDetails;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
+import butterknife.ButterKnife;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 

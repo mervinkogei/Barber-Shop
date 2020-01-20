@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,8 +9,14 @@
     android:padding="8dp"
     android:background="@color/colorBackground">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/single_profile"/>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="250dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
